@@ -1,6 +1,6 @@
 import axios from 'axios';
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5001/api",
+    baseURL: "https://nexora-6ld3.onrender.com/",
     withCredentials: true, //send cookies with the req
 });
