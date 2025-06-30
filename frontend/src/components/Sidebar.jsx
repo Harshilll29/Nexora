@@ -1,73 +1,101 @@
-
-import useAuthUser from '../hooks/useAuthUser'
-import { Link, useLocation } from 'react-router';
-import { BellIcon, HomeIcon, LoaderPinwheel, UserIcon } from 'lucide-react';
+import useAuthUser from '../hooks/useAuthUser';
+import { Link, useLocation } from 'react-router-dom';
+import { BellIcon, HomeIcon, LoaderPinwheel, UserIcon, Menu } from 'lucide-react';
 
 const Sidebar = () => {
-
-    const {authUser} = useAuthUser();
-    const location = useLocation();
-    const currentPath = location.pathname;
+  const { authUser } = useAuthUser();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
-    <>
-      {/* Mobile Header with Logo */}
-      <div className="md:hidden w-full flex items-center justify-between px-4 py-3 bg-base-100 border-b border-base-300 sticky top-0 z-20">
-        <Link to="/" className="flex items-center gap-2.5">
-          <LoaderPinwheel className='size-8 text-primary'/>
-          <span className='text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
-            Nexora
-          </span>
-        </Link>
-      </div>
-
-      {/* Desktop Sidebar */}
-      <aside className='w-64 bg-base-200 border-r border-base-300 hidden md:flex flex-col h-screen sticky top-0'>
-        <div className='p-5 border-b border-base-300'>
+    <div className="drawer lg:drawer-open">
+      {/* Mobile Toggle Button */}
+      <input id="mobile-sidebar" type="checkbox" className="drawer-toggle" />
+      
+      <div className="drawer-content flex flex-col">
+        {/* Top bar on mobile */}
+        <div className="w-full flex items-center justify-between px-4 py-3 bg-base-100 border-b border-base-300 lg:hidden sticky top-0 z-20">
+          <label htmlFor="mobile-sidebar" className="btn btn-ghost btn-circle">
+            <Menu className="size-6" />
+          </label>
           <Link to="/" className="flex items-center gap-2.5">
-            <LoaderPinwheel className='size-9 text-primary'/>
-            <span className='text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
+            <LoaderPinwheel className="size-8 text-primary" />
+            <span className="text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
               Nexora
             </span>
           </Link>
         </div>
 
-        <nav className='flex-1 p-4 space-y-1'>
-            <Link to="/" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/" ? "btn-active" : ""}`}>
-            <HomeIcon className='size-5 text-base-content opacity-70'/>
-            <span>Home</span>
+        {/* Page content will go here */}
+        {/* Example: <Outlet /> or children */}
+      </div>
+
+      {/* Sidebar Drawer */}
+      <div className="drawer-side z-40">
+        <label htmlFor="mobile-sidebar" className="drawer-overlay"></label>
+        <aside className="w-64 bg-base-200 border-r border-base-300 h-full flex flex-col">
+          <div className="p-5 border-b border-base-300">
+            <Link to="/" className="flex items-center gap-2.5">
+              <LoaderPinwheel className="size-9 text-primary" />
+              <span className="text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider">
+                Nexora
+              </span>
+            </Link>
+          </div>
+
+          <nav className="flex-1 p-4 space-y-1">
+            <Link
+              to="/"
+              className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+                currentPath === '/' ? 'btn-active' : ''
+              }`}
+            >
+              <HomeIcon className="size-5 text-base-content opacity-70" />
+              <span>Home</span>
             </Link>
 
-            <Link to="/friends" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/friends" ? "btn-active" : ""}`}>
-            <UserIcon className='size-5 text-base-content opacity-70'/>
-            <span>Friends</span>
+            <Link
+              to="/friends"
+              className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+                currentPath === '/friends' ? 'btn-active' : ''
+              }`}
+            >
+              <UserIcon className="size-5 text-base-content opacity-70" />
+              <span>Friends</span>
             </Link>
 
-            <Link to="/notifications" className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${currentPath === "/notifications" ? "btn-active" : ""}`}>
-            <BellIcon className='size-5 text-base-content opacity-70'/>
-            <span>Notifications</span>
+            <Link
+              to="/notifications"
+              className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
+                currentPath === '/notifications' ? 'btn-active' : ''
+              }`}
+            >
+              <BellIcon className="size-5 text-base-content opacity-70" />
+              <span>Notifications</span>
             </Link>
-        </nav>
+          </nav>
 
-        {/* User Profile */}
-        <div className='p-4 border-t border-base-300 mt-auto'>
-            <div className='flex items-center gap-3'>
-                <div className='avatar'>
-                    <div className='w-10 rounded-full'>
-                        <img src={authUser?.profilePic} alt="User Avatar" />
-                    </div>
+          {/* User Info at Bottom */}
+          <div className="p-4 border-t border-base-300 mt-auto">
+            <div className="flex items-center gap-3">
+              <div className="avatar">
+                <div className="w-10 rounded-full">
+                  <img src={authUser?.profilePic} alt="User Avatar" />
                 </div>
-                <div className='flex-1'>
-                    <p className='font-semibold text-sm'>{authUser?.fullname}</p>
-                    <p className='text-xs text-success flex items-center gap-1'>
-                        <span className='size-2 rounded-full inline-block '>Online</span>
-                    </p>
-                </div>
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold text-sm">{authUser?.fullname}</p>
+                <p className="text-xs text-success flex items-center gap-1">
+                  <span className="size-2 rounded-full bg-success inline-block" />
+                  Online
+                </p>
+              </div>
             </div>
-        </div>
-      </aside>
-    </>
-  )
-}
+          </div>
+        </aside>
+      </div>
+    </div>
+  );
+};
 
-export default Sidebar
+export default Sidebar;
