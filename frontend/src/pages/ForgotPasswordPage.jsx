@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { LoaderPinwheel } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 import img from "../imgs/signupimg.png";
 import { toast } from "react-hot-toast";
@@ -132,9 +132,9 @@ const ForgotPasswordPage = () => {
                 <div className="text-center mt-4">
                   <p className="text-sm">
                     Remembered your password?{" "}
-                    <a href="/login" className="text-primary hover:underline">
+                    <Link to="/login" className="text-primary hover:underline">
                       Go to login
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </div>
