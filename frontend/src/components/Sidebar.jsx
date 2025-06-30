@@ -26,8 +26,6 @@ const Sidebar = () => {
           </Link>
         </div>
 
-        {/* Page content will go here */}
-        {/* Example: <Outlet /> or children */}
       </div>
 
       {/* Sidebar Drawer */}
