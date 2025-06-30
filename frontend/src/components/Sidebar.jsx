@@ -1,3 +1,4 @@
+
 import useAuthUser from '../hooks/useAuthUser'
 import { Link, useLocation } from 'react-router';
 import { BellIcon, HomeIcon, LoaderPinwheel, UserIcon } from 'lucide-react';
@@ -9,14 +10,26 @@ const Sidebar = () => {
     const currentPath = location.pathname;
 
   return (
-    <aside className='w-64 bg-base-200 border-r border-base-300 hidden md:flex flex-col h-screen sticky top-0'>
+    <>
+      {/* Mobile Header with Logo */}
+      <div className="md:hidden w-full flex items-center justify-between px-4 py-3 bg-base-100 border-b border-base-300 sticky top-0 z-20">
+        <Link to="/" className="flex items-center gap-2.5">
+          <LoaderPinwheel className='size-8 text-primary'/>
+          <span className='text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
+            Nexora
+          </span>
+        </Link>
+      </div>
+
+      {/* Desktop Sidebar */}
+      <aside className='w-64 bg-base-200 border-r border-base-300 hidden md:flex flex-col h-screen sticky top-0'>
         <div className='p-5 border-b border-base-300'>
-            <Link to="/" className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5">
             <LoaderPinwheel className='size-9 text-primary'/>
             <span className='text-3xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
-                Nexora
+              Nexora
             </span>
-            </Link>
+          </Link>
         </div>
 
         <nav className='flex-1 p-4 space-y-1'>
@@ -52,7 +65,8 @@ const Sidebar = () => {
                 </div>
             </div>
         </div>
-    </aside>
+      </aside>
+    </>
   )
 }
 
