@@ -53,8 +53,8 @@ export async function signup(req, res) {
         res.cookie('jwt', token, {
             maxAge: 7 * 24 * 60 * 1000,
             httpOnly: true, //Prevents XSS attacks
-            sameSite: 'strict', //Prevents CSRF attacks
-            secure: process.env.NODE_ENV === 'production' //Only send cookie over HTTPS in production
+            sameSite: 'None', //Prevents CSRF attacks
+            secure: true,
         });
         res.status(201).json({
             success: true,
@@ -98,8 +98,8 @@ export async function login(req, res) {
         res.cookie('jwt', token, {
             maxAge: 7 * 24 * 60 * 1000,
             httpOnly: true, //Prevents XSS attacks
-            sameSite: 'strict', //Prevents CSRF attacks
-            secure: process.env.NODE_ENV === 'production' //Only send cookie over HTTPS in production
+            sameSite: 'None', //Prevents CSRF attacks
+            secure: true,
         });
 
         res.status(200).json({ success: true, user })
