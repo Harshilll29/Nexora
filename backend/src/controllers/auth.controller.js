@@ -54,7 +54,7 @@ export async function signup(req, res) {
             maxAge: 7 * 24 * 60 * 1000,
             httpOnly: true, //Prevents XSS attacks
             sameSite: 'None', 
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
         });
         res.status(201).json({
             success: true,
@@ -99,7 +99,7 @@ export async function login(req, res) {
             maxAge: 7 * 24 * 60 * 1000,
             httpOnly: true, //Prevents XSS attacks
             sameSite: 'None', 
-            secure: true,
+            secure: process.env.NODE_ENV === 'production',
         });
 
         res.status(200).json({ success: true, user })
