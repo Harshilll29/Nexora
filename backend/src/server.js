@@ -12,6 +12,8 @@ import { connectDB } from './lib/db.js';
 const app = express();
 const PORT = process.env.PORT
 
+app.set("trust proxy", 1);
+
 app.use(cors({
     origin: "https://nexora-1.vercel.app",
     credentials: true
