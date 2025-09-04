@@ -15,7 +15,7 @@ const PORT = process.env.PORT
 app.set("trust proxy", 1);
 
 app.use(cors({
-    origin: "https://nexora-1.vercel.app",
+    origin: ["https://nexora-1.vercel.app", "http://localhost:5173/login"],
     credentials: true
 }));
 app.use(cookieParser());
